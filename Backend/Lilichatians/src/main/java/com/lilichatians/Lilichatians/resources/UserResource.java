@@ -32,4 +32,28 @@ public class UserResource {
         customResponse.setMessage("Something went wrong");
         return ResponseEntity.status(400).body(customResponse);
     }
+
+    @PostMapping("/verification")
+    public ResponseEntity<CustomResponse> verificationOfUser(@RequestBody UserSignupDto userSignupDto){
+        Boolean isVerified = userService.verificationOfUser(userSignupDto);
+        CustomResponse customResponse = new CustomResponse("Verification is Successful", 200);
+        if (isVerified) {
+            return ResponseEntity.status(200).body(customResponse);
+        }
+        customResponse.setCode(400);
+        customResponse.setMessage("Wrong Code.. Please try again..");
+        return ResponseEntity.status(400).body(customResponse);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<CustomResponse> loginUser(@RequestBody UserSignupDto userSignupDto){
+//        Boolean isVerified = userService.loginUser(userSignupDto);
+        CustomResponse customResponse = new CustomResponse("Verification is Successful", 200);
+//        if (isVerified) {
+//            return ResponseEntity.status(200).body(customResponse);
+//        }
+        customResponse.setCode(400);
+        customResponse.setMessage("Wrong Code.. Please try again..");
+        return ResponseEntity.status(400).body(customResponse);
+    }
 }

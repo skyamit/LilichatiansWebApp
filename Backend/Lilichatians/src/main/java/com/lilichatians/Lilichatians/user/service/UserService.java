@@ -50,4 +50,14 @@ public class UserService {
             return Boolean.FALSE;
         }
     }
+
+    public Boolean verificationOfUser(UserSignupDto userSignupDto) {
+        User user = userDao.fetchByEmailPasswordCode(userSignupDto.getEmail(), userSignupDto.getPassword(), userSignupDto.getCode());
+        if(user == null)
+            return Boolean.FALSE;
+        user.setIsActive(Boolean.TRUE);
+        userDao.save(user);
+        return Boolean.TRUE;
+    }
+
 }
